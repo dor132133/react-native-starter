@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://yc-ik9.anonymous.rn-starter.exp.direct",
-  "packagerNgrokUrl": "https://packager.yc-ik9.anonymous.rn-starter.exp.direct",
-  "ngrokPid": 76723,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 14053,
+  "expoServerNgrokUrl": "https://fa-vqp.anonymous.rn-starter.exp.direct",
+  "packagerNgrokUrl": "https://packager.fa-vqp.anonymous.rn-starter.exp.direct",
+  "ngrokPid": 14150,
   "webpackServerPort": null
 }
