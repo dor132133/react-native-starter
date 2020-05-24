@@ -10,6 +10,9 @@ const blogReducer = (state, action) => {
     }
 }
 
+
+// because dispatch isn't define here (it's defined in createDataContext),
+// we wrap & return it, in a ()=> function. 
 const addBlogPost = (dispatch) => {
     return () => {
         dispatch({ type: 'add_blogpost' })
