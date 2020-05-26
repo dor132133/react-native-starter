@@ -13,6 +13,10 @@ const blogReducer = (state, action) => {
             return state.filter(blogPost => {
                return blogPost.id !== action.payload
             })
+        case 'edit_blogpost':
+            return state.map(blogPost=> {
+                return blogPost.id === action.payload.id? action.payload: blogPost
+            }) 
         default:
             return state
     }
@@ -27,15 +31,21 @@ const addBlogPost = (dispatch) => {
         callback();
     } 
 }
+const editBlogPost = (dispatch) => {
+    return (id, title, content, callback) => {
+        dispatch({ type: 'edit_blogpost', payload: {id, title , content} })
+        callback()
+    } 
+}
 const deleteBlogPost = (dispatch) => {
-    return (id) => { //this inner func, is the actuall function that occured.  
+    return (id) => { //this inner func, is the actuall function that occured inside the component.  
         dispatch({ type: 'delete_blogpost', payload: id })
     } 
 }
 
 export const { Context, Provider } = createDataContext(
     blogReducer,
-    {addBlogPost,deleteBlogPost},
+    {addBlogPost,deleteBlogPost, editBlogPost},
     [{title: 'Test Post', content: 'Test Content', id: 1}]
     );
 
