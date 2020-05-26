@@ -4,7 +4,15 @@ import createDataContext from './createDataContext'
 const blogReducer = (state, action) => {
     switch (action.type) {
         case 'add_blogpost': 
-            return [...state, { title: `Blog Post #${state.length+1}` }];
+            return [...state, {
+                    title: action.payload.title,
+                    id: Math.floor(Math.random()* 9999),
+                    content: action.payload.content
+                }];
+        case 'delete_blogpost': 
+            return state.filter(blogPost => {
+               return blogPost.id !== action.payload
+            })
         default:
             return state
     }
@@ -14,12 +22,22 @@ const blogReducer = (state, action) => {
 // because dispatch isn't define here (it's defined in createDataContext),
 // we wrap & return it, in a ()=> function. 
 const addBlogPost = (dispatch) => {
-    return () => {
-        dispatch({ type: 'add_blogpost' })
+    return (title, content, callback) => {
+        dispatch({ type: 'add_blogpost', payload: {title , content} })
+        callback();
+    } 
+}
+const deleteBlogPost = (dispatch) => {
+    return (id) => { //this inner func, is the actuall function that occured.  
+        dispatch({ type: 'delete_blogpost', payload: id })
     } 
 }
 
-export const { Context, Provider } = createDataContext(blogReducer,{addBlogPost},[]);
+export const { Context, Provider } = createDataContext(
+    blogReducer,
+    {addBlogPost,deleteBlogPost},
+    [{title: 'Test Post', content: 'Test Content', id: 1}]
+    );
 
 /*
 first and goog aproach using useState:
