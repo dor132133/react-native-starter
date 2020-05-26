@@ -10,15 +10,11 @@ const EditScreen = ({navigation}) => {
     const id = navigation.getParam('id')
     const blogPost = state.find( blogPost => blogPost.id === id) 
 
-    // //that's the magic
-    // const [title,setTitle] = useState(blogPost.title);
-    // const [content,setContent] = useState(blogPost.content);
-
     return <BlogPostForm
         initialValues={{title: blogPost.title, content: blogPost.content}} 
         onSubmit={ (title,content) => {
             editBlogPost(id,title, content, ()=>{
-                navigation.navigate("Index")
+                navigation.pop() //navigate to the last screen we were...
             })
     }} />
 }
